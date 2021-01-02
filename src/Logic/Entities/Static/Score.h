@@ -32,6 +32,8 @@ namespace turbohiker {
         unsigned int getFinished() const;
 
         void writeToFile(const std::string& player_name) const;
+
+        static std::string ReadFile();
     };
 }
 

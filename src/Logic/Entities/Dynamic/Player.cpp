@@ -11,6 +11,7 @@ turbohiker::Player::Player() {
     this->setPosition(CONST::PLAYER::START_POSITION);
     this->setSize(CONST::PLAYER::SIZE);
     this->setYelling(CONST::PLAYER::TO_YELL);
+    this->setType(EntityType::Player);
 }
 
 float turbohiker::Player::getDistancetraveled(float point_y) {

@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "../Entity.h"
-#include "../../../Utils/CONST/CONST.h"
+#include "../../../Utils/CONST.h"
 
 namespace turbohiker {
     class Lane : public Entity {

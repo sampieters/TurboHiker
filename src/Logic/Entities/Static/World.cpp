@@ -66,8 +66,7 @@ void turbohiker::World::generateRandomStaticEnemies() {
     std::vector<std::pair<float, float>> already_used;
     int number = RandomNumberGenerator::generate_int(3, 10);
     for (int i = 0; i < number; ++i) {
-        std::shared_ptr<Entity> pff = ConcreteFactory->CreateStaticEnemy();
-        auto comp = std::dynamic_pointer_cast<DynamicEntity>(pff);
+        auto comp = std::dynamic_pointer_cast<DynamicEntity>(ConcreteFactory->CreateStaticEnemy());
         float pos_y = RandomNumberGenerator::Getinstance().generate_float((this->boundaries[2] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES, (this->boundaries[0] + 1)/ CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES);
         pos_y *= CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES;
         unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0, 4);
@@ -88,8 +87,7 @@ void turbohiker::World::generateRandomAttackingEnemies() {
     std::vector<std::pair<float, float>> already_used;
     int number = RandomNumberGenerator::generate_int(3, 10);
     for (int i = 0; i < number; ++i) {
-        std::shared_ptr<Entity> comp = ConcreteFactory->CreateAttackingEnemy();
-
+        auto comp = std::dynamic_pointer_cast<DynamicEntity>(ConcreteFactory->CreateAttackingEnemy());
         float pos_y = RandomNumberGenerator::Getinstance().generate_float((this->boundaries[2] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES, (this->boundaries[0] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES);
         pos_y *= CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES;
         unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0, 4);
@@ -100,6 +98,7 @@ void turbohiker::World::generateRandomAttackingEnemies() {
         if(std::find(already_used.begin(), already_used.end(),temp) == already_used.end()) {
             already_used.emplace_back(pos_x, pos_y);
             comp->setPosition({pos_x, pos_y});
+            comp->setLane(lane_1);
             entities.push_back(comp);
         }
     }
@@ -115,10 +114,6 @@ bool turbohiker::World::HorizontalOutOfBoundaries(float y) {
     return y < boundaries[2] || y > boundaries[0];
 }
 
-bool turbohiker::World::VerticalOutOfBoundaries(float x) {
-    return x < boundaries[3] || x > boundaries[1];
-}
-
 const std::vector<std::shared_ptr<turbohiker::Entity>> &turbohiker::World::getEntities() const {
     return entities;
 }
@@ -132,6 +127,14 @@ void turbohiker::World::update(double elapsedTime) {
             auto dynamic_1 = std::dynamic_pointer_cast<turbohiker::DynamicEntity>(entity_1);
             if (!this->IsCollision(dynamic_1)) {
                 entity_1->update(elapsedTime);
+            } else {
+                if(std::dynamic_pointer_cast<turbohiker::Player>(entity_1) != nullptr) {
+                    auto close_enemy = GetClosestEnemy(dynamic_1);
+                    if(close_enemy != nullptr) {
+                        close_enemy->setYell(true);
+                        close_enemy->setResponse(Pain);
+                    }
+                }
             }
         } else {
             entity_1->update(elapsedTime);
@@ -149,7 +152,7 @@ void turbohiker::World::handlePlayerInput(InputCode code, bool pressed) {
                 }
                 else if(code == Q) {
                     player->MoveLeft();
-                    if(VerticalOutOfBoundaries(player->getPosition().first) || IsCollision(player)) {
+                    if(IsCollision(player)) {
                         player->MoveRight();
                     }
                 }
@@ -158,7 +161,7 @@ void turbohiker::World::handlePlayerInput(InputCode code, bool pressed) {
                 }
                 else if(code == D) {
                     player->MoveRight();
-                    if(VerticalOutOfBoundaries(player->getPosition().first) || IsCollision(player)) {
+                    if(IsCollision(player)) {
                         player->MoveLeft();
                     }
                 }
@@ -169,11 +172,16 @@ void turbohiker::World::handlePlayerInput(InputCode code, bool pressed) {
                         if (enemy != nullptr) {
                             enemy->setScaredMeter(enemy->getScaredMeter() - 50);
                             if(enemy->getScaredMeter() <= 0) {
+                                enemy->setYell(true);
+                                enemy->setResponse(Die);
                                 player->NotifyObservers(Event::MURDERED);
+
+                                //TODO:: ENtity nog niet hier verwijderen want dan roept die zijn death niet
                                 auto iter = std::find(entities.begin(), entities.end(), enemy);
                                 entities.erase(iter);
+                            } else {
+                                CheckWhereToMove(enemy);
                             }
-                            CompetingAi(enemy, true);
                         }
                         player->setYell(true);
                     }
@@ -190,7 +198,7 @@ std::shared_ptr<turbohiker::Enemy> turbohiker::World::GetClosestEnemy(const std:
     for (const auto &entity: entities) {
         auto enemy = std::dynamic_pointer_cast<turbohiker::Enemy>(entity);
         if (enemy != nullptr) {
-            if (player_pos.first == enemy->getPosition().first) {
+            if (player->getPosition().first  == enemy->getPosition().first) {
                 if (enemy->getPosition().second > player_pos.second && enemy->getPosition().second < enemy_pos_y) {
                     enemy_pos_y = enemy->getPosition().second;
                     returnenemy = enemy;
@@ -209,7 +217,7 @@ bool turbohiker::World::IsCollision(const std::shared_ptr<DynamicEntity>& to_che
         }
         auto dynamic_2 = std::dynamic_pointer_cast<turbohiker::DynamicEntity>(entity_2);
         if (dynamic_2 != nullptr) {
-            if(dynamic_2->getPosition().first == to_check->getPosition().first) {
+            if(dynamic_2->getLane() == to_check->getLane()) {
                 if ((to_check->GetFront().second <= dynamic_2->GetFront().second && to_check->GetFront().second >= dynamic_2->GetBack().second) ||
                 (to_check->GetBack().second <= dynamic_2->GetFront().second && to_check->GetBack().second >= dynamic_2->GetBack().second)) {
                     return true;
@@ -240,12 +248,12 @@ void turbohiker::World::handleStates(double elapsedTime) {
         }
         if(std::dynamic_pointer_cast<turbohiker::Competing>(entity) != nullptr) {
             auto competing = std::dynamic_pointer_cast<turbohiker::Competing>(entity);
-            CompetingAi(competing, false);
+            CompetingAi(competing);
         }
     }
 }
 
-bool turbohiker::World::checkFinished(std::shared_ptr<turbohiker::DynamicEntity> to_check) {
+bool turbohiker::World::checkFinished(const std::shared_ptr<turbohiker::DynamicEntity>& to_check) {
     for(const auto& finish: entities) {
         if(std::dynamic_pointer_cast<turbohiker::Finish>(finish) != nullptr) {
             if(to_check->getPosition().second >= finish->getPosition().second) {
@@ -256,46 +264,49 @@ bool turbohiker::World::checkFinished(std::shared_ptr<turbohiker::DynamicEntity>
     return false;
 }
 
-void turbohiker::World::CompetingAi(std::shared_ptr<Enemy> enemy, bool yelled) {
-    if(yelled || std::dynamic_pointer_cast<Competing>(enemy) != nullptr) {
-        if( yelled || GetClosestEnemy(enemy) != nullptr) {
-            if(yelled || GetClosestEnemy(enemy)->GetBack().second - enemy->GetFront().second < 0.05) {
-                enemy->MoveLeft();
-                if (IsCollision(enemy) || VerticalOutOfBoundaries(enemy->getPosition().first) ) {
-                    enemy->MoveRight();
-                    enemy->MoveRight();
-                    if (IsCollision(enemy) || VerticalOutOfBoundaries(enemy->getPosition().first)) {
-                        enemy->MoveLeft();
-                        if(yelled) {
-                            enemy->DoSomethingWhenYell(Cannot);
-                        }
-                    } else {
-                        enemy->MoveLeft();
-                        if(yelled) {
-                            enemy->DoSomethingWhenYell(Right);
-                        } else {
-                            enemy->MoveRight();
-                        }
-                    }
-                } else {
-                    enemy->MoveRight();
-                    enemy->MoveRight();
-                    if (IsCollision(enemy) || VerticalOutOfBoundaries(enemy->getPosition().first)) {
-                        enemy->MoveLeft();
-                        if(yelled) {
-                            enemy->DoSomethingWhenYell(Left);
-                        } else {
-                            enemy->MoveLeft();
-                        }
-                    } else {
-                        enemy->MoveLeft();
-                        if(yelled) {
-                            enemy->DoSomethingWhenYell(None);
-                        } else {
-                            enemy->MoveLeft();
-                        }
-                    }
+void turbohiker::World::CheckWhereToMove(const std::shared_ptr<Enemy>& enemy) {
+    MovePreference pref = Cannot;
+    if(GetClosestEnemy(enemy) != nullptr) {
+        // Get the preference of the enemy to move to
+        // Check if enemy can move left by checking if there is a lane on the left.
+        if(enemy->getLane()->getPrevious() != nullptr) {
+            // Check if on the left there is an enemy.
+            enemy->MoveLeft();
+            if(!IsCollision(enemy)) {
+                pref = Left;
+            }
+            enemy->MoveRight();
+        }
+        // Check if enemy can move right by checking id there is a lane on the right.
+        if(enemy->getLane()->getNext() != nullptr) {
+            // Check if on the right there is an enemy.
+            enemy->MoveRight();
+            if(IsCollision(enemy)) {
+                // Collision on the right. Now check if you could move left, if not preference is Cannot.
+                if(pref != Left) {
+                    pref = Cannot;
                 }
+            } else {
+                // No Collision so can move. Both if pref was already left, Right if pref was cannot.
+                if(pref == Left) {
+                    pref = None;
+                } else {
+                    pref = Right;
+                }
+            }
+            enemy->MoveLeft();
+        }
+        enemy->DoSomethingWhenYell(pref);
+    }
+    // If there is no closest enemy than that (not existing) enemy doesn't need to move
+}
+
+void turbohiker::World::CompetingAi(const std::shared_ptr<Enemy>& enemy) {
+    if(std::dynamic_pointer_cast<Competing>(enemy) != nullptr) {
+        if(GetClosestEnemy(enemy) != nullptr) {
+            if(GetClosestEnemy(enemy)->GetBack().second - enemy->GetFront().second < 0.05) {
+                CheckWhereToMove(enemy);
+                enemy->setYell(false);
             }
         }
     }

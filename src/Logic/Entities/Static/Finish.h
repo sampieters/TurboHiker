@@ -9,7 +9,7 @@
 #define TURBOHIKER_FINISH_H
 
 #include "../Entity.h"
-#include "../../../Utils/CONST/CONST.h"
+#include "../../../Utils/CONST.h"
 
 namespace turbohiker {
     class Finish: public Entity {

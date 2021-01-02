@@ -47,11 +47,12 @@ void turbohiker::Enemy::setResponse(Response response) {
 turbohiker::Static::Static(): Enemy(CONST::ENEMIES::STATIC::MOVE_CHANCE) {
     this->setSpeed(0);
     this->setScaredMeter(CONST::ENEMIES::STATIC::STRENGTH);
+    this->setType(EntityType::Static);
 }
 
 void turbohiker::Static::DoSomethingWhenYell(MovePreference preference) {
     int chance = RandomNumberGenerator::Getinstance().generate_int(0, 100);
-    if(chance > this->getMoveChance()) {
+    if(chance > this->getMoveChance() && preference != Cannot) {
         //MOVE
         if(preference == None) {
             if (chance > (this->getMoveChance() / 2)) {
@@ -77,11 +78,12 @@ void turbohiker::Static::DoSomethingWhenYell(MovePreference preference) {
 turbohiker::Competing::Competing(): Enemy(CONST::ENEMIES::COMPETING::MOVE_CHANCE) {
     this->setSpeed(CONST::ENEMIES::COMPETING::MIN_SPEED);
     this->setScaredMeter(CONST::ENEMIES::STATIC::STRENGTH);
+    this->setType(EntityType::Competing);
 }
 
 void turbohiker::Competing::DoSomethingWhenYell(MovePreference preference) {
     int chance = RandomNumberGenerator::Getinstance().generate_int(0, 100);
-    if(chance > this->getMoveChance()) {
+    if(chance > this->getMoveChance() && preference != Cannot) {
         //MOVE
         if(preference == None) {
             if (chance > (this->getMoveChance() / 2)) {
@@ -96,7 +98,6 @@ void turbohiker::Competing::DoSomethingWhenYell(MovePreference preference) {
         }
         else if(preference == Right) {
             this->MoveRight();
-
         }
         this->setResponse(Obey);
     } else {
@@ -108,6 +109,7 @@ void turbohiker::Competing::DoSomethingWhenYell(MovePreference preference) {
 turbohiker::Attacking::Attacking(): Enemy(CONST::ENEMIES::ATTACKING::MOVE_CHANCE) {
     this->setSpeed(-CONST::ENEMIES::ATTACKING::MIN_SPEED);
     this->setScaredMeter(CONST::ENEMIES::ATTACKING::STRENGTH);
+    this->setType(EntityType::Attacking);
 }
 
 void turbohiker::Attacking::DoSomethingWhenYell(MovePreference preference) {

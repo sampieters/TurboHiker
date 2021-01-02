@@ -14,9 +14,9 @@
 #include <utility>
 #include "../../../Singletons/RandomNumberGenerator.h"
 #include "../../Factories/AbstractFactory.h"
-#include "../../../Utils/CONST/CONST.h"
+#include "../../../Utils/CONST.h"
+#include "../../../Utils/Enum.h"
 #include "../Entity.h"
-#include "../../../Utils/Enum/Enum.h"
 
 namespace turbohiker {
     class World : public turbohiker::Entity {
@@ -49,9 +49,11 @@ namespace turbohiker {
 
         void generateRandomAttackingEnemies();
 
-        void CompetingAi(std::shared_ptr<Enemy> enemy, bool yelled);
+        void CheckWhereToMove(const std::shared_ptr<Enemy>& enemy);
 
-        bool checkFinished(std::shared_ptr<turbohiker::DynamicEntity> to_check);
+        void CompetingAi(const std::shared_ptr<Enemy>& enemy);
+
+        bool checkFinished(const std::shared_ptr<turbohiker::DynamicEntity>& to_check);
 
         bool isStop();
 
@@ -66,8 +68,6 @@ namespace turbohiker {
         const std::vector<std::shared_ptr<turbohiker::Entity>> &getEntities() const;
 
         bool HorizontalOutOfBoundaries(float y);
-
-        bool VerticalOutOfBoundaries(float x);
 
         bool IsCollision(const std::shared_ptr<DynamicEntity>& to_check);
 

@@ -9,7 +9,7 @@
 
 #include "../Entity.h"
 #include "../Static/Lane.h"
-#include "../../../Utils/CONST/CONST.h"
+#include "../../../Utils/CONST.h"
 
 namespace turbohiker {
     class DynamicEntity: public Entity {

@@ -60,14 +60,23 @@ void turbohiker::Score::writeToFile(const std::string& player_name) const {
 
     bool write = false;
     std::string line;
-    while (getline(inputFile, line)) {
-        std::string whut = line.substr(line.find(':') + 2);
-        int number = std::stoi(whut);
-        if(number < score && !write) {
-            outputFile << player_name << ": " << score << "\n";
-            write = true;
+    // If file  empty
+    if(inputFile.peek() == std::ifstream::traits_type::eof()) {
+        outputFile << player_name << ": " << score << "\n";
+    } else {
+        while (getline(inputFile, line)) {
+            std::string whut = line.substr(line.find(':') + 2);
+            int number = std::stoi(whut);
+            if (number < score && !write) {
+                outputFile << player_name << ": " << score << "\n";
+                write = true;
+            }
+            outputFile << line << "\n";
         }
-        outputFile << line << "\n";
+        // If at the end of the file the new score is not written, write it.
+        if(!write) {
+            outputFile << player_name << ": " << score << "\n";
+        }
     }
 
     inputFile.close();
@@ -75,4 +84,16 @@ void turbohiker::Score::writeToFile(const std::string& player_name) const {
 
     std::remove("Resources/Scoreboard.txt");
     std::rename("Resources/new_Scoreboard","Resources/Scoreboard.txt");
+}
+
+std::string turbohiker::Score::ReadFile() {
+    std::ifstream score_file("Resources/Scoreboard.txt");
+    std::string line;
+    std::string scoreboard;
+    int i = 1;
+    while (getline(score_file, line) && i < 11) {
+        scoreboard += std::to_string(i) + ") " + line + "\n";
+        i += 1;
+    }
+    return scoreboard;
 }

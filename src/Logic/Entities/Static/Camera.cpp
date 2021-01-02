@@ -13,6 +13,7 @@ turbohiker::Camera::Camera(std::shared_ptr<turbohiker::Score> score, std::shared
     this->setPlayer(player);
     this->setPosition({0, this->getPlayer()->getPosition().second + (this->getSize().second/2) - 0.5});
     this->setSize({8, 2.5});
+    this->setType(EntityType::Camera);
 }
 
 void turbohiker::Camera::update(double elapsedTime) {

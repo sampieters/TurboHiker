@@ -10,9 +10,17 @@
 #define TURBOHIKER_ENTITY_H
 
 #include <iostream>
+#include "../../Utils/Enum.h"
 
 namespace turbohiker {
     class Entity {
+    private:
+        EntityType type;
+    public:
+        EntityType getType() const;
+
+        void setType(EntityType type);
+
     private:
         std::pair<float, float> position;
         std::pair<float, float> size;

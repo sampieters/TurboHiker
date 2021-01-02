@@ -10,7 +10,7 @@
 #define TURBOHIKER_ENEMY_H
 
 #include "./DynamicEntity.h"
-#include "../../../Utils/Enum/Enum.h"
+#include "../../../Utils/Enum.h"
 #include "../../../Singletons/RandomNumberGenerator.h"
 
 namespace turbohiker {

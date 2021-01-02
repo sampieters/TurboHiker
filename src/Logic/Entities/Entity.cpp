@@ -28,3 +28,11 @@ turbohiker::Entity::Entity() = default;
 
 turbohiker::Entity::Entity(std::pair<float, float> position, std::pair<float, float> size, float speed):
     position(std::move(position)), size(std::move(size)), active(true) {}
+
+EntityType turbohiker::Entity::getType() const {
+    return type;
+}
+
+void turbohiker::Entity::setType(EntityType type) {
+    Entity::type = type;
+}

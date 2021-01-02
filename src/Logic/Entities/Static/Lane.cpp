@@ -9,7 +9,8 @@
 
 turbohiker::Lane::Lane() {
     this->setSize({(abs(CONST::WORLD::LEFT_BOUNDARY) + abs(CONST::WORLD::RIGHT_BOUNDARY)) / CONST::WORLD::NR_OF_LANES, abs(CONST::WORLD::LOWER_BOUNDARY) + abs(CONST::WORLD::UPPER_BOUNDARY)});
-    //this->setSize({2, 6});
+    this->setType(EntityType::Lane);
+
 }
 
 float turbohiker::Lane::GetMiddle() {
