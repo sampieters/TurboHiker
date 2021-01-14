@@ -6,6 +6,7 @@
 #define TURBOHIKER_MYEXCEPTION_H
 
 #include <exception>
+#include <memory>
 #include <string>
 
 namespace exceptions {

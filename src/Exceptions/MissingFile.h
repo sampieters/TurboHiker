@@ -6,6 +6,7 @@
 #define TURBOHIKER_MISSINGFILE_H
 
 #include "MyException.h"
+#include <memory>
 
 namespace exceptions {
     class MissingFile : public MyException {

@@ -12,6 +12,7 @@
 #include "../Entity.h"
 #include <fstream>
 #include <vector>
+#include <memory>
 
 namespace turbohiker {
     class Score: public Observer {

@@ -8,6 +8,7 @@
 #define GAME_TRANSFORMATION_H
 
 #include <vector>
+#include <memory>
 
 /** \class Transformation Transformation.h "src/Singletons/Transformation.h"
  * \brief Transformation class to go from world coördinates to window coördinates.

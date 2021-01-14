@@ -9,6 +9,7 @@
 #define TURBOHIKER_WORLD_H
 
 #include <vector>
+#include <memory>
 #include "Finish.h"
 
 #include <utility>

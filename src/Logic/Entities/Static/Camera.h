@@ -9,6 +9,7 @@
 #ifndef TURBOHIKER_CAMERA_H
 #define TURBOHIKER_CAMERA_H
 
+#include <memory>
 #include "../Entity.h"
 #include "../Dynamic/Player.h"
 #include "Score.h"

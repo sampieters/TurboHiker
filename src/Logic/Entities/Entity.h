@@ -9,6 +9,7 @@
 #ifndef TURBOHIKER_ENTITY_H
 #define TURBOHIKER_ENTITY_H
 
+#include <memory>
 #include <iostream>
 #include "../../Utils/Enum.h"
 

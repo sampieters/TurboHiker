@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <memory>
 
 // Define keys:
 #define DELETE_KEY 8

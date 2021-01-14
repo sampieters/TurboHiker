@@ -11,6 +11,8 @@
 #include "../../../Observer/Observable.h"
 #include "../Static/Score.h"
 
+#include <memory>
+
 namespace turbohiker {
     class Player: public DynamicEntity, public Observable  {
     public:

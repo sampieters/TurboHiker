@@ -8,6 +8,7 @@
 #include <cstdlib>     /* srand, rand */
 #include <ctime>       /* time */
 #include <random>
+#include <memory>
 
 /** \class RandomNumberGenerator RandomNumberGenerator.h "src/Singletons/RandomNumberGenerator.h"
  * \brief Class for generating random int or float between a min and max value.

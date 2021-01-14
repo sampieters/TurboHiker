@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 #include "Observer.h"
 
 

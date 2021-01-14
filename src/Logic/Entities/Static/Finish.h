@@ -8,6 +8,7 @@
 #ifndef TURBOHIKER_FINISH_H
 #define TURBOHIKER_FINISH_H
 
+#include <memory>
 #include "../Entity.h"
 #include "../../../Utils/CONST.h"
 

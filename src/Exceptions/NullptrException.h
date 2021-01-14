@@ -6,6 +6,7 @@
 #define TURBOHIKER_NULLPTREXCEPTION_H
 
 #include "MyException.h"
+#include <memory>
 
 namespace exceptions {
     class NullptrException : public MyException {

@@ -5,6 +5,7 @@
 #ifndef TURBOHIKERSFML_ENTITY_H
 #define TURBOHIKERSFML_ENTITY_H
 
+#include <memory>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "../../Logic/Entities/Entity.h"

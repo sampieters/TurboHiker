@@ -6,6 +6,7 @@
 #define TURBOHIKER_BUTTON_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "Object.h"
 
 class Scoreboard: public sf::Drawable {

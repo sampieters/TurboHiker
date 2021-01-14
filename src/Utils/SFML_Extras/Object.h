@@ -10,6 +10,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Main.hpp>
 #include <SFML/Audio.hpp>
+#include <memory>
 
 class Object {
 private:

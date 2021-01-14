@@ -8,6 +8,8 @@
 #include "../../../Logic/Entities/Dynamic/Enemy.h"
 #include "../Entity.h"
 
+#include <memory>
+
 namespace turbohikerSFML {
     class Enemy: public Entity {
         std::shared_ptr<sf::SoundBuffer> buffer;

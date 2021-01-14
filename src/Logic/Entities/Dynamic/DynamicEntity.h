@@ -11,6 +11,8 @@
 #include "../Static/Lane.h"
 #include "../../../Utils/CONST.h"
 
+#include <memory>
+
 namespace turbohiker {
     class DynamicEntity: public Entity {
     private:

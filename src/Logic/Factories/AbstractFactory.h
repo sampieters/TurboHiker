@@ -5,6 +5,7 @@
 #ifndef TURBOHIKER_ABSTRACTFACTORY_H
 #define TURBOHIKER_ABSTRACTFACTORY_H
 
+#include <memory>
 #include "../Entities/Entity.h"
 #include "../Entities/Dynamic/Player.h"
 #include "../Entities/Dynamic/Enemy.h"

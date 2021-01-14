@@ -13,6 +13,8 @@
 #include "../../../Utils/Enum.h"
 #include "../../../Singletons/RandomNumberGenerator.h"
 
+#include <memory>
+
 namespace turbohiker {
     class Enemy : public DynamicEntity {
     private:

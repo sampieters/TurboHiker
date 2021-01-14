@@ -8,6 +8,8 @@
 #include "../../../Logic/Entities/Dynamic/Player.h"
 #include "../Entity.h"
 
+#include <memory>
+
 namespace turbohikerSFML {
     class Player: public Entity, public turbohiker::Player {
     private:

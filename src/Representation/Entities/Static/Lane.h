@@ -7,6 +7,7 @@
 
 #include "../../../Logic/Entities/Static/Lane.h"
 #include "../Entity.h"
+#include <memory>
 
 namespace turbohikerSFML {
     class Lane: public Entity, public turbohiker::Lane {

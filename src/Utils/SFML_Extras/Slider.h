@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <memory>
 
 class Slider: public sf::Drawable {
     sf::RectangleShape slider;

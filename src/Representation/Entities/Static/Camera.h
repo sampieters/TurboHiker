@@ -8,6 +8,8 @@
 #include "../../../Logic/Entities/Static/Camera.h"
 #include "../Entity.h"
 
+#include <memory>
+
 namespace turbohikerSFML {
 class Camera : public Entity, public turbohiker::Camera {
 public:

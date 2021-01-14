@@ -17,6 +17,7 @@
 #include <SFML/Main.hpp>
 #include <fstream>
 #include <utility>
+#include <memory>
 
 #include "Representation/Factories/AbstractFactory.h"
 #include "src/Utils/SFML_Extras/Textbox.h"

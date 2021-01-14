@@ -8,6 +8,8 @@
 #include "../Entity.h"
 #include "../../../Logic/Entities/Static/Finish.h"
 
+#include <memory>
+
 namespace turbohikerSFML {
     class Finish : public Entity, public turbohiker::Finish {
     public:

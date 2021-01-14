@@ -8,6 +8,7 @@
 #ifndef TURBOHIKER_LANE_H
 #define TURBOHIKER_LANE_H
 
+#include <memory>
 #include <vector>
 #include "../Entity.h"
 #include "../../../Utils/CONST.h"

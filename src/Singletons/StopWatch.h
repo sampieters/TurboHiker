@@ -8,6 +8,7 @@
 #define GAME_STOPWATCH_H
 
 #include <chrono>
+#include <memory>
 
 /** \class StopWatch StopWatch.h "src/Singletons/StopWatch.h"
  * \brief Stopwatch class used to let the game run independent from the frame rat.
