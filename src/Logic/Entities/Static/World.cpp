@@ -6,6 +6,7 @@
  */
 
 #include "World.h"
+#include <algorithm>
 
 turbohiker::World::World(std::string player_name) {
     this->boundaries = {static_cast<float>(CONST::WORLD::UPPER_BOUNDARY), static_cast<float>(CONST::WORLD::RIGHT_BOUNDARY),
