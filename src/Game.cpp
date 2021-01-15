@@ -185,6 +185,8 @@ void T_Game_Menu::processEvents() {
                                                 this->context_->setPreviousState(std::make_shared<T_Game_Menu>());
                                                 this->context_->Request_Next();
                                                 return;
+                                            } else {
+                                                //TODO:: DISPLAY THERE HAS TO BE A NAME
                                             }
                                             break;
                                         }
