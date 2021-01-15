@@ -10,10 +10,9 @@
 
 #include <vector>
 #include <memory>
+#include <utility>
 #include <algorithm>
 #include "Finish.h"
-
-#include <utility>
 #include "../../../Singletons/RandomNumberGenerator.h"
 #include "../../Factories/AbstractFactory.h"
 #include "../../../Utils/CONST.h"

@@ -1,7 +1,7 @@
-//
-// Created by Sam Pieters on 01/12/2020.
-//
-
+/**
+ * \author Sam Pieters
+ * \date 01 December 2020
+ */
 #include "Entity.h"
 
 

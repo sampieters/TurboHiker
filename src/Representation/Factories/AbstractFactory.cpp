@@ -1,6 +1,7 @@
-//
-// Created by Sam Pieters on 03/12/2020.
-//
+/**
+ * \author Sam Pieters
+ * \date 03 December 2020
+ */
 
 #include "AbstractFactory.h"
 #include "../../Logic/Entities/Static/World.h"

@@ -1,5 +1,5 @@
 /**
- * \brief Transformation class to go from world coördinates to window coördinates.
+ * \brief Stopwatch class to time the game.
  * \author Sam Pieters
  * \date 24 December 2020
  */

@@ -1,8 +1,8 @@
-//
-// Created by Sam Pieters on 16/11/2020.
-//
+/**
+ * \author Sam Pieters
+ * \date 16 November 2020
+ */
 
-#include <vector>
 #include "RandomNumberGenerator.h"
 
 RandomNumberGenerator::RandomNumberGenerator() {

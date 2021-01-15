@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 16/11/2020.
-//
+/**
+ * \brief RandomNumberGenerator class that cn generate random numbers (int or float).
+ * \author Sam Pieters
+ * \date 16 November 2020
+ */
 
 #ifndef GAME_RANDOMNUMBERGENERATOR_H
 #define GAME_RANDOMNUMBERGENERATOR_H
@@ -8,6 +10,7 @@
 #include <cstdlib>     /* srand, rand */
 #include <ctime>       /* time */
 #include <random>
+#include <vector>
 #include <memory>
 
 /** \class RandomNumberGenerator RandomNumberGenerator.h "src/Singletons/RandomNumberGenerator.h"

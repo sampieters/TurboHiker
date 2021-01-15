@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 01/12/2020.
-//
+/**
+ * \brief The Entity class, a superclass that allowes to show an entity on a screen.
+ * \author Sam Pieters
+ * \date 01 December 2020
+ */
 
 #ifndef TURBOHIKERSFML_ENTITY_H
 #define TURBOHIKERSFML_ENTITY_H

@@ -1,6 +1,7 @@
-//
-// Created by Sam Pieters on 17/11/2020.
-//
+/**
+ * \author Sam Pieters
+ * \date 24 December 2020
+ */
 
 #include "StopWatch.h"
 
