@@ -12,7 +12,7 @@ Slider::Slider(int x, int y) {
     sliderWidth = 20;
     sliderHeight = 30;
 
-    if (!font.loadFromFile("Fonts\\Neon.ttf"))
+    if (!font.loadFromFile("Fonts/Neon.ttf"))
         std::cout << "Error loading font\n";
 
     text.setFont(font);

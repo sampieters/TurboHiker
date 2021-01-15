@@ -6,8 +6,8 @@
 
 #include "Game.h"
 
-#define FRAMERATE 120                              // Framerate: The number of max loops in one second
-#define TIME_PER_CYCLE (1000000.0 / FRAMERATE)     // Time for one loop
+#define FRAMERATE 120 // Framerate: The number of max loops in one second
+#define TIME_PER_CYCLE (1000.0 / FRAMERATE)     // Time for one loop
 
 void T_State::run() {
     double elapsedSeconds = 0;
@@ -20,7 +20,7 @@ void T_State::run() {
         update(elapsedSeconds);
         render();
         // Restart the timer
-        elapsedSeconds = StopWatch::Getinstance().GetElapsedTime() / 1000000;
+        elapsedSeconds = StopWatch::Getinstance().GetElapsedTime() * 0.001;
         StopWatch::Getinstance().Reset();
     }
 }
@@ -262,7 +262,7 @@ void T_Game_Play::run() {
             return;
         }
         // Restart the timer
-        elapsedSeconds = StopWatch::Getinstance().GetElapsedTime() / 1000000;
+        elapsedSeconds = StopWatch::Getinstance().GetElapsedTime() * 0.001;
         StopWatch::Getinstance().Reset();
     }
 }
@@ -315,7 +315,7 @@ void T_Game_Play::update(double elapsedTime) {
         auto countdown = std::dynamic_pointer_cast<sf::Text>(this->getGuiObjects()[0]);
         std::string whut = countdown->getString();
         int i = std::stoi(whut);
-        Seconds +=  (StopWatch::Getinstance().GetElapsedTime() / 1000000);
+        Seconds +=  (StopWatch::Getinstance().GetElapsedTime() * 0.001);
         if(i == 0) {
             timer = false;
             this->setGuiObjects({});
