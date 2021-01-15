@@ -11,15 +11,17 @@
 #include "../../../Observer/Observable.h"
 #include "../Entity.h"
 #include <fstream>
-#include <vector>
 #include <memory>
+#include <vector>
 
 namespace turbohiker {
-    class Score: public Observer {
-    private:
+class Score : public Observer
+{
+private:
         unsigned int finished;
         unsigned int score;
-    public:
+
+public:
         Score();
 
         void OnNotify(Event event) override;
@@ -35,7 +37,7 @@ namespace turbohiker {
         void writeToFile(const std::string& player_name) const;
 
         static std::string ReadFile();
-    };
-}
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_SCOREBOARD_H
+#endif // TURBOHIKER_SCOREBOARD_H

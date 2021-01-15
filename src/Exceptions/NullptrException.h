@@ -9,10 +9,11 @@
 #include <memory>
 
 namespace exceptions {
-    class NullptrException : public MyException {
-    public:
-        explicit NullptrException(const std::string &problem);
-    };
-}
+class NullptrException : public MyException
+{
+public:
+        explicit NullptrException(const std::string& problem);
+};
+} // namespace exceptions
 
-#endif //TURBOHIKER_NULLPTREXCEPTION_H
+#endif // TURBOHIKER_NULLPTREXCEPTION_H

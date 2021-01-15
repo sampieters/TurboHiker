@@ -6,8 +6,9 @@
 
 #include "Finish.h"
 
-turbohiker::Finish::Finish() {
-    this->setPosition({0, 2.5});
-    this->setSize({CONST::WORLD::SIZE.first, 0.2});
-    this->setType(EntityType::Finish);
+turbohiker::Finish::Finish()
+{
+        this->setPosition({0, 2.5});
+        this->setSize({CONST::WORLD::SIZE.first, 0.2});
+        this->setType(EntityType::Finish);
 }

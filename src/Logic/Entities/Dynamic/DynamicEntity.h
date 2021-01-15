@@ -7,27 +7,30 @@
 #ifndef TURBOHIKER_DYNAMICENTITY_H
 #define TURBOHIKER_DYNAMICENTITY_H
 
+#include "../../../Utils/CONST.h"
 #include "../Entity.h"
 #include "../Static/Lane.h"
-#include "../../../Utils/CONST.h"
 
 #include <memory>
 
 namespace turbohiker {
-    class DynamicEntity: public Entity {
-    private:
+class DynamicEntity : public Entity
+{
+private:
         double TimeSindsYelling;
         std::string yelling;
-    public:
-        const std::shared_ptr<Lane> &getLane() const;
 
-        void setLane(const std::shared_ptr<Lane> &lane);
+public:
+        const std::shared_ptr<Lane>& getLane() const;
 
-    private:
+        void setLane(const std::shared_ptr<Lane>& lane);
+
+private:
         std::shared_ptr<Lane> lane;
         float speed;
         bool yell;
-    public:
+
+public:
         // CONSTRUCTOR
         DynamicEntity();
 
@@ -57,9 +60,9 @@ namespace turbohiker {
 
         std::pair<float, float> GetRightSide();
 
-        const std::string &getYelling() const;
+        const std::string& getYelling() const;
 
-        void setYelling(const std::string &yelling);
+        void setYelling(const std::string& yelling);
 
         bool isYell() const;
 
@@ -70,7 +73,7 @@ namespace turbohiker {
         void setTimeSindsYelling(double timeSindsYelling);
 
         void update(double elapsedTime) override;
-    };
-}
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_DYNAMICENTITY_H
+#endif // TURBOHIKER_DYNAMICENTITY_H

@@ -1,37 +1,37 @@
 /**
  * \brief Camera class used to let you see part of the world.
- * \details This class keeps track of the players position to view the player at all time. And keeps the score to display it.
- * \author Sam Pieters
- * \date 27 December 2020
+ * \details This class keeps track of the players position to view the player at all time. And keeps the score to
+ * display it. \author Sam Pieters \date 27 December 2020
  */
-
 
 #ifndef TURBOHIKER_CAMERA_H
 #define TURBOHIKER_CAMERA_H
 
-#include <memory>
-#include "../Entity.h"
 #include "../Dynamic/Player.h"
+#include "../Entity.h"
 #include "Score.h"
+#include <memory>
 
 namespace turbohiker {
-    class Camera: public Entity {
-    private:
+class Camera : public Entity
+{
+private:
         std::shared_ptr<turbohiker::Player> player;
         std::shared_ptr<turbohiker::Score> score;
-    public:
+
+public:
         Camera(std::shared_ptr<turbohiker::Score> score, std::shared_ptr<turbohiker::Player> player);
 
-        const std::shared_ptr<turbohiker::Score> &getScore() const;
+        const std::shared_ptr<turbohiker::Score>& getScore() const;
 
-        void setScore(const std::shared_ptr<turbohiker::Score> &score);
+        void setScore(const std::shared_ptr<turbohiker::Score>& score);
 
         void update(double elapsedTime) override;
 
-        const std::shared_ptr<turbohiker::Player> &getPlayer() const;
+        const std::shared_ptr<turbohiker::Player>& getPlayer() const;
 
-        void setPlayer(const std::shared_ptr<turbohiker::Player> &player);
-    };
-}
+        void setPlayer(const std::shared_ptr<turbohiker::Player>& player);
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_CAMERA_H
+#endif // TURBOHIKER_CAMERA_H

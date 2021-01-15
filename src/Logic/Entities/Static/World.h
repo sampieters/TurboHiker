@@ -8,29 +8,31 @@
 #ifndef TURBOHIKER_WORLD_H
 #define TURBOHIKER_WORLD_H
 
-#include <vector>
-#include <memory>
-#include <utility>
-#include <algorithm>
-#include "Finish.h"
 #include "../../../Singletons/RandomNumberGenerator.h"
-#include "../../Factories/AbstractFactory.h"
 #include "../../../Utils/CONST.h"
 #include "../../../Utils/Enum.h"
+#include "../../Factories/AbstractFactory.h"
 #include "../Entity.h"
+#include "Finish.h"
+#include <algorithm>
+#include <memory>
+#include <utility>
+#include <vector>
 
 namespace turbohiker {
-    class World : public turbohiker::Entity {
-    private:
+class World : public turbohiker::Entity
+{
+private:
         std::shared_ptr<AbstractFactory::Factory> ConcreteFactory;
         std::vector<std::shared_ptr<turbohiker::Entity>> entities;
         std::shared_ptr<Score> score;
         std::string player_name;
         std::vector<float> boundaries;
-    public:
-        const std::shared_ptr<Score> &getScore() const;
 
-        void setScore(const std::shared_ptr<Score> &score);
+public:
+        const std::shared_ptr<Score>& getScore() const;
+
+        void setScore(const std::shared_ptr<Score>& score);
 
         World(std::string player_name);
 
@@ -62,18 +64,18 @@ namespace turbohiker {
          * Getters
          */
 
-        const std::shared_ptr<AbstractFactory::Factory> &getConcreteFactory() const;
+        const std::shared_ptr<AbstractFactory::Factory>& getConcreteFactory() const;
 
-        void setConcreteFactory(const std::shared_ptr<AbstractFactory::Factory> &concreteFactory);
+        void setConcreteFactory(const std::shared_ptr<AbstractFactory::Factory>& concreteFactory);
 
-        const std::vector<std::shared_ptr<turbohiker::Entity>> &getEntities() const;
+        const std::vector<std::shared_ptr<turbohiker::Entity>>& getEntities() const;
 
         bool HorizontalOutOfBoundaries(float y);
 
         bool IsCollision(const std::shared_ptr<DynamicEntity>& to_check);
 
         std::shared_ptr<Enemy> GetClosestEnemy(const std::shared_ptr<DynamicEntity>& player);
-    };
-}
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_WORLD_H
+#endif // TURBOHIKER_WORLD_H

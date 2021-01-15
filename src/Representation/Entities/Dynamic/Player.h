@@ -11,15 +11,16 @@
 #include <memory>
 
 namespace turbohikerSFML {
-    class Player: public Entity, public turbohiker::Player {
-    private:
+class Player : public Entity, public turbohiker::Player
+{
+private:
         sf::Sound response;
-    public:
+
+public:
         Player();
+
         void display() override;
+};
+} // namespace turbohikerSFML
 
-
-    };
-}
-
-#endif //TURBOHIKERSFML_PLAYER_H
+#endif // TURBOHIKERSFML_PLAYER_H

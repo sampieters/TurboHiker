@@ -5,23 +5,22 @@
 #ifndef GAME_OBSERVABLE_H
 #define GAME_OBSERVABLE_H
 
+#include "Observer.h"
 #include <iostream>
 #include <list>
 #include <memory>
-#include "Observer.h"
 
-
-class Observable {
+class Observable
+{
 private:
-    std::list<std::weak_ptr<Observer>> observers;
+        std::list<std::weak_ptr<Observer>> observers;
 
 public:
-    void AttachObserver(const std::shared_ptr<Observer>& observer);
+        void AttachObserver(const std::shared_ptr<Observer>& observer);
 
-    void DetachObserver(const std::shared_ptr<Observer>& observer);
+        void DetachObserver(const std::shared_ptr<Observer>& observer);
 
-    void NotifyObservers(Event event);
+        void NotifyObservers(Event event);
 };
 
-
-#endif //GAME_OBSERVABLE_H
+#endif // GAME_OBSERVABLE_H

@@ -7,15 +7,16 @@
 #ifndef TURBOHIKER_PLAYER_H
 #define TURBOHIKER_PLAYER_H
 
-#include "./DynamicEntity.h"
 #include "../../../Observer/Observable.h"
 #include "../Static/Score.h"
+#include "./DynamicEntity.h"
 
 #include <memory>
 
 namespace turbohiker {
-    class Player: public DynamicEntity, public Observable  {
-    public:
+class Player : public DynamicEntity, public Observable
+{
+public:
         Player();
 
         bool checkDistanceTraveled(float lenght);
@@ -23,7 +24,7 @@ namespace turbohiker {
         float getDistancetraveled(float point_y);
 
         void update(double elapsedTime) override;
-    };
-}
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_PLAYER_H
+#endif // TURBOHIKER_PLAYER_H

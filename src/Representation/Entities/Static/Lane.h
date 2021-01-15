@@ -10,13 +10,13 @@
 #include <memory>
 
 namespace turbohikerSFML {
-    class Lane: public Entity, public turbohiker::Lane {
-    public:
+class Lane : public Entity, public turbohiker::Lane
+{
+public:
         Lane();
+
         void display() override;
+};
+} // namespace turbohikerSFML
 
-
-    };
-}
-
-#endif //TURBOHIKERSFML_LANE_H
+#endif // TURBOHIKERSFML_LANE_H

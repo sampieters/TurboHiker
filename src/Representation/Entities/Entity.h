@@ -7,34 +7,35 @@
 #ifndef TURBOHIKERSFML_ENTITY_H
 #define TURBOHIKERSFML_ENTITY_H
 
-#include <memory>
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 #include "../../Logic/Entities/Entity.h"
 #include "../../Singletons/Transformation.h"
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+#include <memory>
 
 namespace turbohikerSFML {
-    class Entity {
-    private:
+class Entity
+{
+private:
         std::shared_ptr<sf::RenderWindow> WindowToDrawTo;
         sf::Texture texture;
         sf::Sprite sprite;
-    public:
+
+public:
         Entity(const std::string& texture);
 
-        const std::shared_ptr<sf::RenderWindow> &getWindowToDrawTo() const;
+        const std::shared_ptr<sf::RenderWindow>& getWindowToDrawTo() const;
 
-        void setWindowToDrawTo(const std::shared_ptr<sf::RenderWindow> &windowToDrawTo);
+        void setWindowToDrawTo(const std::shared_ptr<sf::RenderWindow>& windowToDrawTo);
 
-        const sf::Texture &getTexture() const;
+        const sf::Texture& getTexture() const;
 
-        void setTexture(const sf::Texture &texture);
+        void setTexture(const sf::Texture& texture);
 
-        const sf::Sprite &getSprite() const;
+        const sf::Sprite& getSprite() const;
 
-        void setSprite(const sf::Sprite &sprite);
+        void setSprite(const sf::Sprite& sprite);
+};
+} // namespace turbohikerSFML
 
-    };
-}
-
-#endif //TURBOHIKERSFML_ENTITY_H
+#endif // TURBOHIKERSFML_ENTITY_H

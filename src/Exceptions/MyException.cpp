@@ -4,8 +4,6 @@
 
 #include "MyException.h"
 
-const char* exceptions::MyException::what() const noexcept {
-    return problem.c_str();
-}
+const char* exceptions::MyException::what() const noexcept { return problem.c_str(); }
 
-exceptions::MyException::MyException(std::string problem): problem(std::move(problem)) {}
+exceptions::MyException::MyException(std::string problem) : problem(std::move(problem)) {}

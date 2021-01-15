@@ -5,18 +5,19 @@
 #ifndef TURBOHIKERSFML_FINISH_H
 #define TURBOHIKERSFML_FINISH_H
 
-#include "../Entity.h"
 #include "../../../Logic/Entities/Static/Finish.h"
+#include "../Entity.h"
 
 #include <memory>
 
 namespace turbohikerSFML {
-    class Finish : public Entity, public turbohiker::Finish {
-    public:
+class Finish : public Entity, public turbohiker::Finish
+{
+public:
         Finish();
+
         void display() override;
+};
+} // namespace turbohikerSFML
 
-    };
-}
-
-#endif //TURBOHIKERSFML_FINISH_H
+#endif // TURBOHIKERSFML_FINISH_H

@@ -11,12 +11,14 @@
 #include <memory>
 
 namespace turbohikerSFML {
-class Camera : public Entity, public turbohiker::Camera {
+class Camera : public Entity, public turbohiker::Camera
+{
 public:
-    Camera(std::shared_ptr<turbohiker::Score> score, std::shared_ptr<turbohiker::Player> player, const std::shared_ptr<sf::RenderWindow>& window);
-    void display() override;
+        Camera(std::shared_ptr<turbohiker::Score> score, std::shared_ptr<turbohiker::Player> player,
+               const std::shared_ptr<sf::RenderWindow>& window);
 
-    };
-}
+        void display() override;
+};
+} // namespace turbohikerSFML
 
-#endif //TURBOHIKERSFML_CAMERA_H
+#endif // TURBOHIKERSFML_CAMERA_H

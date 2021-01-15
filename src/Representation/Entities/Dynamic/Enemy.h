@@ -11,38 +11,46 @@
 #include <memory>
 
 namespace turbohikerSFML {
-    class Enemy: public Entity {
+class Enemy : public Entity
+{
         std::shared_ptr<sf::SoundBuffer> buffer;
         std::shared_ptr<sf::Sound> sound;
-    public:
+
+public:
         Enemy(const std::string& texture);
 
-        const std::shared_ptr<sf::SoundBuffer> &getBuffer() const;
+        const std::shared_ptr<sf::SoundBuffer>& getBuffer() const;
 
-        void setBuffer(const std::shared_ptr<sf::SoundBuffer> &buffer);
+        void setBuffer(const std::shared_ptr<sf::SoundBuffer>& buffer);
 
-        const std::shared_ptr<sf::Sound> &getSound() const;
+        const std::shared_ptr<sf::Sound>& getSound() const;
 
-        void setSound(const std::shared_ptr<sf::Sound> &sound);
-    };
+        void setSound(const std::shared_ptr<sf::Sound>& sound);
+};
 
-    class Competing: public Enemy, public turbohiker::Competing {
-    public:
+class Competing : public Enemy, public turbohiker::Competing
+{
+public:
         Competing();
-        void display() override;
-    };
 
-    class Static: public Enemy, public turbohiker::Static {
-    public:
+        void display() override;
+};
+
+class Static : public Enemy, public turbohiker::Static
+{
+public:
         Static();
-        void display() override;
-    };
 
-    class Attacking: public Enemy, public turbohiker::Attacking {
-    public:
+        void display() override;
+};
+
+class Attacking : public Enemy, public turbohiker::Attacking
+{
+public:
         Attacking();
-        void display() override;
-    };
-}
 
-#endif //TURBOHIKERSFML_ENEMY_H
+        void display() override;
+};
+} // namespace turbohikerSFML
+
+#endif // TURBOHIKERSFML_ENEMY_H

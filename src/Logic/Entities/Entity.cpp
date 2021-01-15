@@ -8,31 +8,21 @@
 
 #include "Entity.h"
 
-const std::pair<float, float> &turbohiker::Entity::getPosition() const {
-    return position;
-}
+const std::pair<float, float>& turbohiker::Entity::getPosition() const { return position; }
 
-void turbohiker::Entity::setPosition(const std::pair<float, float> &position) {
-    Entity::position = position;
-}
+void turbohiker::Entity::setPosition(const std::pair<float, float>& position) { Entity::position = position; }
 
-const std::pair<float, float> &turbohiker::Entity::getSize() const {
-    return size;
-}
+const std::pair<float, float>& turbohiker::Entity::getSize() const { return size; }
 
-void turbohiker::Entity::setSize(const std::pair<float, float> &size) {
-    Entity::size = size;
-}
+void turbohiker::Entity::setSize(const std::pair<float, float>& size) { Entity::size = size; }
 
 turbohiker::Entity::Entity() = default;
 
-turbohiker::Entity::Entity(std::pair<float, float> position, std::pair<float, float> size, float speed):
-    position(std::move(position)), size(std::move(size)), active(true) {}
-
-EntityType turbohiker::Entity::getType() const {
-    return type;
+turbohiker::Entity::Entity(std::pair<float, float> position, std::pair<float, float> size, float speed)
+    : position(std::move(position)), size(std::move(size)), active(true)
+{
 }
 
-void turbohiker::Entity::setType(EntityType type) {
-    Entity::type = type;
-}
+EntityType turbohiker::Entity::getType() const { return type; }
+
+void turbohiker::Entity::setType(EntityType type) { Entity::type = type; }

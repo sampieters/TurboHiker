@@ -1,26 +1,28 @@
 #include "Game.h"
 #include <memory>
 
-int main() {
-    T_Game game(std::make_shared<T_Game_Menu>());
-    return 0;
+int main()
+{
+        T_Game game(std::make_shared<T_Game_Menu>());
+        return 0;
 }
 
-//TODO:: 1) Comment Utils
-//TODO:: 2) In transformation is still something hardcoded -> fix that
-//TODO:: 3) Comment fuurther onthe representation entity
+// TODO:: 1) Comment Utils
+// TODO:: 2) In transformation is still something hardcoded -> fix that
+// TODO:: 3) Comment fuurther onthe representation entity
 
 /** \mainpage Report The Flash TurboHiker
  *
  * \section Introduction
  *
- * This is the exam project of Sam Pieters. It is a Turbohiker based on the series The Flash. Every sound and picture used
- * in this project is originally from the The Flash series.
+ * This is the exam project of Sam Pieters. It is a Turbohiker based on the series The Flash. Every sound and picture
+ * used in this project is originally from the The Flash series.
  *
  * \section Game
- * The Game consists of multiple states: the main page, the game loop and an scoreboard page. These states are implemented with
- * the state pattern design. This is an extra design i implemented based on the following source https://refactoring.guru/design-patterns/state/cpp/example.
- * The following subsections will describe the use and functionality of the states in more detail.
+ * The Game consists of multiple states: the main page, the game loop and an scoreboard page. These states are
+ * implemented with the state pattern design. This is an extra design i implemented based on the following source
+ * https://refactoring.guru/design-patterns/state/cpp/example. The following subsections will describe the use and
+ * functionality of the states in more detail.
  *
  * \subsection Main
  * This is the first state that the game will be in when the game is started. It is a simple window with a background,
@@ -48,14 +50,14 @@ int main() {
  * before he starts playing otherwise it will be a to quick start and let the player make mistakes.
  *
  * 2) player: <br>
- * The player is the only type of entity that can be controlled. A player can yell, change lanes, speed up and slow down.
- * The play can be moved or change speed with the z, q, s, d keys and will yell when pressed on the the space bar.
+ * The player is the only type of entity that can be controlled. A player can yell, change lanes, speed up and slow
+ * down. The play can be moved or change speed with the z, q, s, d keys and will yell when pressed on the the space bar.
  *
- * When a player yells a amount of 50 points will be subtracted from the players score. If the enemy being yelled at should
- * die than there will be another 100 point subtracted from the score. If a player collides with an enemy, the score will
- * be deducted with 1 point. The player can earn point by moving a specified lenght in the world and by finishing. The
- * game keeps track of the competing enemies that crossed the finish. The amount of point given at the end for the player
- * will depend on which place the player ends.
+ * When a player yells a amount of 50 points will be subtracted from the players score. If the enemy being yelled at
+ * should die than there will be another 100 point subtracted from the score. If a player collides with an enemy, the
+ * score will be deducted with 1 point. The player can earn point by moving a specified lenght in the world and by
+ * finishing. The game keeps track of the competing enemies that crossed the finish. The amount of point given at the
+ * end for the player will depend on which place the player ends.
  *
  * A player can't move to a lane on the same y-coördinates if there is an enemy in the way. The player can only yell
  * in front of him to an enemy. If there is no enemy in front of the player, the score of the player is still deducted
@@ -79,9 +81,9 @@ int main() {
  *
  * 4) camera: <br>
  * The camera will keep track of the players position and updates it's own position. An extra functionality is that the
- * camera will stop when his front or end are going out of the bounds of the world this creates an effect when the player
- * goes over the finish because the camera stops. The camera holds a text value to display the score at any time when
- * running. The camera shows a part of the world so that the rest of the world is still mysterious and exciting.
+ * camera will stop when his front or end are going out of the bounds of the world this creates an effect when the
+ * player goes over the finish because the camera stops. The camera holds a text value to display the score at any time
+ * when running. The camera shows a part of the world so that the rest of the world is still mysterious and exciting.
  *
  * 5) lanes: <br>
  * The lanes are the x-coördinates where the dynamic entities (entities that can move) can be. The amount of lanes can
@@ -92,14 +94,14 @@ int main() {
  * the score gathered when not finished will not be saved.
  *
  * \subsection Scoreboard
- * In the end the updated scoreboard (with the score the player just earned) will be displayed. The score that the player
- * earned will be loaded in the Scoreboard.txt file (src/Resources/Scoreboard.txt) if he/she has high enough points to be
- * in the top 10. If the player has earned a score that is high enough to be in the top 10 than his name and score will
- * be displayed. Every player can be multiple times on the scoreboard. For example is the first player has 2000 points
- * and the same player earns 1900 point than he will be in first and second place.
+ * In the end the updated scoreboard (with the score the player just earned) will be displayed. The score that the
+ * player earned will be loaded in the Scoreboard.txt file (src/Resources/Scoreboard.txt) if he/she has high enough
+ * points to be in the top 10. If the player has earned a score that is high enough to be in the top 10 than his name
+ * and score will be displayed. Every player can be multiple times on the scoreboard. For example is the first player
+ * has 2000 points and the same player earns 1900 point than he will be in first and second place.
  *
- * If less than 10 people have played the game, the scoreboard will only display the amount of people who have played the
- * game. The window is resizable and can be closed in this state.
+ * If less than 10 people have played the game, the scoreboard will only display the amount of people who have played
+ * the game. The window is resizable and can be closed in this state.
  *
  * \section Features
  *
@@ -116,9 +118,16 @@ int main() {
  * the abstract factory is used in the logic of the game (srs/Logic/Factories) and the concrete factory is used in the
  * representation of the game (src/Representation/Factories).
  *
- * 3) Observer:
- * Design used to updte the score when the player has an interaction with the world. In the game the player is an observable
- * and the score is an observer.
+ * 3) Observer: <br>
+ * Design used to update the score when the player has an interaction with the world. In the game the player is an
+ * observable and the score is an observer. The score will change using switch case statement on an event which is an
+ * enumerator.
+ *
+ * 4) Singletons: <br>
+ * Singletons are used for the Transformation, RandomNumberGenerator and StopWatch. The stopwatch didn't need to be a
+ * singleton following the assignement so it is considered as a feature.
+ *
+ * 5) composition: <br>
  *
  *
  */

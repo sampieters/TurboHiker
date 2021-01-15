@@ -9,19 +9,21 @@
 #ifndef TURBOHIKER_ENEMY_H
 #define TURBOHIKER_ENEMY_H
 
-#include "./DynamicEntity.h"
-#include "../../../Utils/Enum.h"
 #include "../../../Singletons/RandomNumberGenerator.h"
+#include "../../../Utils/Enum.h"
+#include "./DynamicEntity.h"
 
 #include <memory>
 
 namespace turbohiker {
-    class Enemy : public DynamicEntity {
-    private:
+class Enemy : public DynamicEntity
+{
+private:
         float MoveChance;
         Response response;
         unsigned int scared_meter;
-    public:
+
+public:
         Enemy();
 
         Response getResponse() const;
@@ -30,7 +32,7 @@ namespace turbohiker {
 
         Enemy(float chance);
 
-        virtual void DoSomethingWhenYell(MovePreference preference) {};
+        virtual void DoSomethingWhenYell(MovePreference preference){};
 
         float getMoveChance() const;
 
@@ -39,26 +41,31 @@ namespace turbohiker {
         unsigned int getScaredMeter() const;
 
         void setScaredMeter(unsigned int scaredMeter);
-    };
+};
 
-    class Static : public Enemy {
-    public:
+class Static : public Enemy
+{
+public:
         Static();
-        void DoSomethingWhenYell(MovePreference preference) override;
-    };
 
-    class Competing : public Enemy {
-    public:
+        void DoSomethingWhenYell(MovePreference preference) override;
+};
+
+class Competing : public Enemy
+{
+public:
         Competing();
-        void DoSomethingWhenYell(MovePreference preference) override;
-    };
 
-    class Attacking : public Enemy {
-    public:
+        void DoSomethingWhenYell(MovePreference preference) override;
+};
+
+class Attacking : public Enemy
+{
+public:
         Attacking();
+
         void DoSomethingWhenYell(MovePreference preference) override;
+};
+} // namespace turbohiker
 
-    };
-}
-
-#endif //TURBOHIKER_ENEMY_H
+#endif // TURBOHIKER_ENEMY_H

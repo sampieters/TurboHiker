@@ -9,44 +9,46 @@
 #ifndef TURBOHIKER_ENTITY_H
 #define TURBOHIKER_ENTITY_H
 
-#include <memory>
-#include <iostream>
 #include "../../Utils/Enum.h"
+#include <iostream>
+#include <memory>
 
 namespace turbohiker {
-    class Entity {
-    private:
+class Entity
+{
+private:
         EntityType type;
-    public:
+
+public:
         EntityType getType() const;
 
         void setType(EntityType type);
 
-    private:
+private:
         std::pair<float, float> position;
         std::pair<float, float> size;
         bool active;
 
-    public:
+public:
         // CONSTRUCTOR
         Entity(std::pair<float, float> position, std::pair<float, float> size, float speed);
 
         Entity();
 
         // GETTERS AND SETTERS
-        const std::pair<float, float> &getPosition() const;
+        const std::pair<float, float>& getPosition() const;
 
-        void setPosition(const std::pair<float, float> &position);
+        void setPosition(const std::pair<float, float>& position);
 
-        const std::pair<float, float> &getSize() const;
+        const std::pair<float, float>& getSize() const;
 
-        void setSize(const std::pair<float, float> &size);
+        void setSize(const std::pair<float, float>& size);
 
         // OWN FUNCTIONS
-        virtual void display() {};
+        virtual void display(){};
 
-        virtual void update(double elapsedTime) {};
-    };
-}
+        virtual void update(double elapsedTime){};
+};
+} // namespace turbohiker
 
-#endif //TURBOHIKER_ENTITY_H
+#endif // TURBOHIKER_ENTITY_H

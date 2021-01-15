@@ -10,11 +10,12 @@
 #include <string>
 
 namespace exceptions {
-    class MyException : public std::exception {
-    private:
+class MyException : public std::exception
+{
+private:
         std::string problem;
 
-    public:
+public:
         /**
          * Make a new exception
          * \param problem: The problem why the exception is thrown
@@ -25,8 +26,8 @@ namespace exceptions {
          * Get the reason that caused the exception
          * \return a string describing the cause of the exception
          */
-        [[nodiscard]] const char *what() const noexcept override;
-    };
-}
+        [[nodiscard]] const char* what() const noexcept override;
+};
+} // namespace exceptions
 
-#endif //TURBOHIKER_MYEXCEPTION_H
+#endif // TURBOHIKER_MYEXCEPTION_H

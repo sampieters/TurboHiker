@@ -4,4 +4,7 @@
 
 #include "MissingFile.h"
 
-exceptions::MissingFile::MissingFile(const std::string& filename): MyException("File " + filename + "is missing or wrong filename") {}
+exceptions::MissingFile::MissingFile(const std::string& filename)
+    : MyException("File " + filename + "is missing or wrong filename")
+{
+}

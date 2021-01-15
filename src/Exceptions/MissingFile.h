@@ -9,14 +9,15 @@
 #include <memory>
 
 namespace exceptions {
-    class MissingFile : public MyException {
-    public:
+class MissingFile : public MyException
+{
+public:
         /**
          * Constructor
          * @param filename The name of the missing file
          */
-        explicit MissingFile(const std::string &filename);
-    };
-}
+        explicit MissingFile(const std::string& filename);
+};
+} // namespace exceptions
 
-#endif //TURBOHIKER_MISSINGFILE_H
+#endif // TURBOHIKER_MISSINGFILE_H

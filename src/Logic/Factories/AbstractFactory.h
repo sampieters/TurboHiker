@@ -5,16 +5,16 @@
 #ifndef TURBOHIKER_ABSTRACTFACTORY_H
 #define TURBOHIKER_ABSTRACTFACTORY_H
 
-#include <memory>
-#include "../Entities/Entity.h"
-#include "../Entities/Dynamic/Player.h"
 #include "../Entities/Dynamic/Enemy.h"
+#include "../Entities/Dynamic/Player.h"
+#include "../Entities/Entity.h"
 #include "../Entities/Static/Score.h"
-
+#include <memory>
 
 namespace AbstractFactory {
-    class Factory {
-    public:
+class Factory
+{
+public:
         /// Destructor needs to be virtual.
         virtual ~Factory() {}
 
@@ -25,7 +25,8 @@ namespace AbstractFactory {
 
         virtual std::shared_ptr<turbohiker::Entity> CreatePlayer() const = 0;
 
-        virtual std::shared_ptr<turbohiker::Entity> CreateCamera(std::shared_ptr<turbohiker::Entity> entity, std::shared_ptr<turbohiker::Score> score) const = 0;
+        virtual std::shared_ptr<turbohiker::Entity> CreateCamera(std::shared_ptr<turbohiker::Entity> entity,
+                                                                 std::shared_ptr<turbohiker::Score> score) const = 0;
 
         virtual std::shared_ptr<turbohiker::Entity> CreateCompetingEnemy() const = 0;
 
@@ -36,8 +37,7 @@ namespace AbstractFactory {
         virtual std::shared_ptr<turbohiker::Entity> CreateLane() const = 0;
 
         virtual std::shared_ptr<turbohiker::Score> CreateScore() const = 0;
-    };
-}
+};
+} // namespace AbstractFactory
 
-
-#endif //TURBOHIKER_ABSTRACTFACTORY_H
+#endif // TURBOHIKER_ABSTRACTFACTORY_H
