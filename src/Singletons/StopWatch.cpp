@@ -31,9 +31,9 @@ void StopWatch::Reset() {
 }
 
 double StopWatch::GetElapsedTime() {
-    double temp = duration.count();
+    double temp = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
     if (running) {
-        temp += (std::chrono::system_clock::now() - last_start).count();
+        temp += std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - last_start).count();
     }
     return temp;
 }

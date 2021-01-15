@@ -17,7 +17,7 @@
  */
 class StopWatch {
 private:
-    std::chrono::system_clock::duration duration;
+    std::chrono::duration<double> duration;
     std::chrono::system_clock::time_point last_start;
     bool running;
 
