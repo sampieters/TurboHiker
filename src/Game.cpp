@@ -4,6 +4,7 @@
  * \date 24 December 2020
  */
 
+#include <src/Utils/SFML_Extras/Textbox.h>
 #include "Game.h"
 
 #define FRAMERATE 120                              // Framerate: The number of max loops in one second
@@ -130,9 +131,6 @@ void T_Game_Menu::init() {
     play->setOrigin({(play->getSize().x/2),(play->getSize().y/2)});
     play->setPosition({static_cast<float>(this->context_->getWindow()->getSize().x/2), static_cast<float>(this->context_->getWindow()->getSize().y/2)});
 
-    std::shared_ptr<Slider> volume = std::make_shared<Slider>(100, 100);
-    volume->create(0, 100);
-
     std::shared_ptr<Textbox> wow = std::make_shared<Textbox>(40, sf::Color::White, false);
     wow->setPosition({play->getPosition().x, play->getPosition().y - play->getSize().y - 5});
     wow->setFont(*this->getGuiFont());
@@ -142,7 +140,7 @@ void T_Game_Menu::init() {
     wow->setLimit(true, 20);
 
     this->setGuiSound(music);
-    this->setGuiObjects({background, play, wow, volume});
+    this->setGuiObjects({background, play, wow});
 }
 
 void T_Game_Menu::processEvents() {
@@ -197,10 +195,6 @@ void T_Game_Menu::processEvents() {
                         if(std::dynamic_pointer_cast<Textbox>(object) != nullptr) {
                             auto textbox = std::dynamic_pointer_cast<Textbox>(object);
                             textbox->setSelected(textbox->isMouseOver(position));
-                        }
-                        if(std::dynamic_pointer_cast<Slider>(object) != nullptr) {
-                            auto slider = std::dynamic_pointer_cast<Slider>(object);
-                            slider->logic(*this->context_->getWindow());
                         }
                     }
                 }

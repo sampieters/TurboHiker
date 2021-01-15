@@ -1,5 +1,12 @@
 cmake_minimum_required(VERSION 3.10.2)
-include(${CMAKE_CURRENT_LIST_DIR}/SFML-2.5.1/CMakeLists.txt)
+
+if (APPLE)
+    include(${CMAKE_CURRENT_LIST_DIR}/SFML-2.5.1/CMakeLists.txt)
+else()
+    find_package(SFML COMPONENTS system window graphics network audio)
+    include_directories(${SFML_INCLUDE_DIR})
+endif()
+
 include_directories(${CMAKE_CURRENT_LIST_DIR}/)
 project(TurboHiker)
 
@@ -9,7 +16,6 @@ set(GUI
         src/Utils/SFML_Extras/Object.cpp src/Utils/SFML_Extras/Object.h
         src/Utils/SFML_Extras/Button.cpp src/Utils/SFML_Extras/Button.h
         src/Utils/SFML_Extras/Textbox.cpp src/Utils/SFML_Extras/Textbox.h
-        src/Utils/SFML_Extras/Slider.cpp src/Utils/SFML_Extras/Slider.h
         )
 
 add_library(Logic STATIC
@@ -64,7 +70,6 @@ add_executable(TurboHiker
         src/Utils/CONST.h
         src/Utils/Enum.h
         )
-
 
 target_link_libraries(TurboHiker Logic)
 target_link_libraries(TurboHiker sfml-audio sfml-graphics sfml-window sfml-system)

@@ -22,7 +22,6 @@
 #include "Representation/Factories/AbstractFactory.h"
 #include "src/Utils/SFML_Extras/Textbox.h"
 #include "src/Utils/SFML_Extras/Button.h"
-#include "src/Utils/SFML_Extras/Slider.h"
 #include "src/Utils/SFML_Extras/Object.h"
 #include "Logic/Entities/Static/Score.h"
 #include "Logic/Entities/Static/World.h"
