@@ -8,20 +8,50 @@ int main()
 }
 
 // TODO:: 1) Comment Utils
-// TODO:: 2) Comment further on the logic world
 
 /** \mainpage Report The Flash TurboHiker
  *
  * \section Introduction
  *
- * This is the exam project of Sam Pieters. It is a Turbohiker based on the series The Flash. Every sound and picture
- * used in this project is originally from the The Flash series.
+ * A turbohiker game made by Sam Pieters for the advanced programming course of the University of
+ * Antwerp.
+ *
+ * \section Hierarchy of classes
+ * The game is modelled such that the logic of the game can act independently from the visualization (or representation).
+ *
+ * The logic is set up as a static library. The logic is that everything that is part of the world is an entity. These
+ * entities are divided in dynamic entities (for which there is a derived class) and static entites (for which there is
+ * no derived class). The entities that can move in the game (player and enemies) have each a derived class from the dynamic
+ * entity class. The other entities (camera, lanes, ...) are not derived from a static entity class because this class
+ * would implement no further functionality in the game (because static entities only have a position and size which is
+ * already implemented in the entity (super)class). The camera moves across the world but is seen as a static entity because
+ * it doesn't really move but updates to the position of the player. The world delegates to every entity (and their representation
+ * if there is one) what to do. For further reading on this topic, check the composition design pattern.
+ *
+ * Every (logic) entity is given a visualization. The representation of each entity is thus a class that is derived from
+ * the logic entity. This choice is made because by removal of the SFML visualization that is used, the logic of the game would
+ * still work. So, the logic is independent from the representation but not the other way around.
+ *
+ * Note: An extra class structure is used (Utils/SFML_Extras) for the implementation of functionality on the menu screen
+ * and the scoreboard screen. These classes are extra implmented logic for SFML objects that are not implemented by SFML
+ * itself (buttons, textboxes, ...). These extra classes are derived from the sf::Drawable superclass such that they could
+ * be drawed on the screen like every other sf::Sprite or sf::Shape. without having seperate draw functionality (makes
+ * cleaner code).
+ *
  *
  * \section Game
  * The Game consists of multiple states: the main page, the game loop and an scoreboard page. These states are
  * implemented with the state pattern design. This is an extra design i implemented based on the following source
- * https://refactoring.guru/design-patterns/state/cpp/example. The following subsections will describe the use and
- * functionality of the states in more detail.
+ * https://refactoring.guru/design-patterns/state/cpp/example. A game object can have a state that is either the menu state, the
+ * play state or the scoreboard state. These states are derived classes that inherit from the class state. This will
+ * guarantee that each specific state has some functionality in common to with the other states ensure
+ * proper initialization, running, rendering, etc... . A state can (because of this design) give his own functionality
+ * to the basic functions by overriding the basic function in the state class. All states can be independent from the
+ * actions in the other states and al states can go to a new state. When a state transfer to a new state it will first
+ * initialize the new state, change the game state and than go over to the new state. This ensures that no undifined
+ * behaviour can occur and that implementation of new states (for example settings) can be done without problems.
+ *
+ * The following subsections will describe the use and functionality of each of the states in more detail.
  *
  * \subsection Main
  * This is the first state that the game will be in when the game is started. It is a simple window with a background,
@@ -97,7 +127,7 @@ int main()
  * player earned will be loaded in the Scoreboard.txt file (src/Resources/Scoreboard.txt) if he/she has high enough
  * points to be in the top 10. If the player has earned a score that is high enough to be in the top 10 than his name
  * and score will be displayed. Every player can be multiple times on the scoreboard. For example is the first player
- * has 2000 points and the same player earns 1900 point than he will be in first and second place.
+ * has 2000 points and the same player earns 1900 points than he will be in first and second place.
  *
  * If less than 10 people have played the game, the scoreboard will only display the amount of people who have played
  * the game. The window is resizable and can be closed in this state.
@@ -124,7 +154,7 @@ int main()
  *
  * 4) Singletons: <br>
  * Singletons are used for the Transformation, RandomNumberGenerator and StopWatch. The stopwatch didn't need to be a
- * singleton following the assignement so it is considered as a feature.
+ * singleton following the assignment so it is considered as a feature.
  *
  * 5) Composition: <br>
  * The world of the game (Logic/Entities/Static/World.h) contains a list of child entities and delegates visualisation requests
