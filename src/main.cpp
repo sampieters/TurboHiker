@@ -7,8 +7,6 @@ int main()
         return 0;
 }
 
-// TODO:: 1) Comment Utils
-
 /** \mainpage Report The Flash TurboHiker
  *
  * \section Introduction

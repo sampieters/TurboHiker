@@ -51,8 +51,5 @@ there will be initialized.
 The spefications of the code can be found in the doxygen. Simply go to the following [link](index.html). If the link
 doesn't work, you can simply go to the index.html file in the same folder as you found the README.
 
-## 6) References
-
-
 
 **HAVE FUN PLAYING!**
