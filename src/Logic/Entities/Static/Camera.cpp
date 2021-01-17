@@ -1,10 +1,13 @@
 /**
  * \brief Camera class used to let you see part of the world.
  * \details This class keeps track of the players position to view the player at all time. And keeps the score to
- * display it. \author Sam Pieters \date 27 December 2020
+ * display it.
+ * \author Sam Pieters
+ * \date 27 December 2020
  */
 
 #include "Camera.h"
+#include "src/Utils/CONST.h"
 
 #include <utility>
 
@@ -13,7 +16,7 @@ turbohiker::Camera::Camera(std::shared_ptr<turbohiker::Score> score, std::shared
 {
         this->setPlayer(player);
         this->setPosition({0, this->getPlayer()->getPosition().second + (this->getSize().second / 2) - 0.5});
-        this->setSize({8, 2.5});
+        this->setSize({CONST::WORLD::SIZE.first, CONST::WORLD::UPPER_BOUNDARY - 0.5});
         this->setType(EntityType::Camera);
 }
 

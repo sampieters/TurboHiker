@@ -10,15 +10,13 @@
 
 turbohiker::Enemy::Enemy()
 {
-        // TODO:: NOG VERANDEREN NAAR ENEMY SPEED EN CONSTS VOOR MAKEN
-        this->setSize(CONST::PLAYER::SIZE);
+        this->setSize(CONST::ENEMIES::SIZE);
         this->setYell(false);
 }
 
 turbohiker::Enemy::Enemy(float chance) : MoveChance(chance)
 {
-        // TODO:: NOG VERANDEREN NAAR ENEMY SPEED EN CONSTS VOOR MAKEN
-        this->setSize(CONST::PLAYER::SIZE);
+        this->setSize(CONST::ENEMIES::SIZE);
         this->setYell(false);
 }
 
@@ -45,10 +43,9 @@ void turbohiker::Static::DoSomethingWhenYell(MovePreference preference)
 {
         int chance = RandomNumberGenerator::Getinstance().generate_int(0, 100);
         if (chance > this->getMoveChance() && preference != Cannot) {
-                // MOVE
                 if (preference == None) {
                         if (chance > (this->getMoveChance() / 2)) {
-                                // Move in 50% of the cases to the right and other to the left
+                                /* Move in 50% of the cases to the right and other to the left */
                                 this->MoveRight();
                         } else {
                                 this->MoveLeft();
@@ -76,10 +73,9 @@ void turbohiker::Competing::DoSomethingWhenYell(MovePreference preference)
 {
         int chance = RandomNumberGenerator::Getinstance().generate_int(0, 100);
         if (chance > this->getMoveChance() && preference != Cannot) {
-                // MOVE
                 if (preference == None) {
                         if (chance > (this->getMoveChance() / 2)) {
-                                // Move in 50% of the cases to the right and other to the left
+                                /* Move in 50% of the cases to the right and other to the left */
                                 this->MoveRight();
                         } else {
                                 this->MoveLeft();
@@ -98,7 +94,7 @@ void turbohiker::Competing::DoSomethingWhenYell(MovePreference preference)
 
 turbohiker::Attacking::Attacking() : Enemy(CONST::ENEMIES::ATTACKING::MOVE_CHANCE)
 {
-        this->setSpeed(-CONST::ENEMIES::ATTACKING::MIN_SPEED);
+        this->setSpeed(CONST::ENEMIES::ATTACKING::MIN_SPEED);
         this->setScaredMeter(CONST::ENEMIES::ATTACKING::STRENGTH);
         this->setType(EntityType::Attacking);
 }
@@ -107,7 +103,6 @@ void turbohiker::Attacking::DoSomethingWhenYell(MovePreference preference)
 {
         int chance = RandomNumberGenerator::Getinstance().generate_int(0, 100);
         if (chance > this->getMoveChance()) {
-                // SLOWDOWN
                 this->SlowDown();
                 this->setResponse(Obey);
         } else {

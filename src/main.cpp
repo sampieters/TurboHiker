@@ -8,8 +8,7 @@ int main()
 }
 
 // TODO:: 1) Comment Utils
-// TODO:: 2) In transformation is still something hardcoded -> fix that
-// TODO:: 3) Comment fuurther onthe representation entity
+// TODO:: 2) Comment further on the logic world
 
 /** \mainpage Report The Flash TurboHiker
  *
@@ -105,7 +104,7 @@ int main()
  *
  * \section Features
  *
- * \subsection game-patterns
+ * \subsection Game-patterns
  * This subsection will describe short what patterns are used in the game. Further explenation can be found in the class
  * of that design. Extra desing patterns are seen as extra features.
  *
@@ -113,7 +112,7 @@ int main()
  * Design used to indicate the state of a game. That is, the menu, play or scoreboard state. Every state has a window,
  * different gui objects and has the functionality to go to another state.
  *
- * 2) Abstract factory: <br>
+ * 2) AbstractFactory: <br>
  * Design used to make every entity in the game. This pattern has 2 parts, an abstract factory and a concrete factory
  * the abstract factory is used in the logic of the game (srs/Logic/Factories) and the concrete factory is used in the
  * representation of the game (src/Representation/Factories).
@@ -127,7 +126,8 @@ int main()
  * Singletons are used for the Transformation, RandomNumberGenerator and StopWatch. The stopwatch didn't need to be a
  * singleton following the assignement so it is considered as a feature.
  *
- * 5) composition: <br>
- *
+ * 5) Composition: <br>
+ * The world of the game (Logic/Entities/Static/World.h) contains a list of child entities and delegates visualisation requests
+ * to its children.
  *
  */

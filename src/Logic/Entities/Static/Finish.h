@@ -12,11 +12,18 @@
 #include <memory>
 
 namespace turbohiker {
+
+/** \class Finish Finish.h "src/Logic/Entities/Static/Finish.h"
+ * \brief A world consist out of exactly one finish. Competing enemies and players cn finish in the world.
+ */
 class Finish : public Entity
 {
 public:
+        /**
+         * Default constructor of a Finish
+         */
         Finish();
 };
-} // namespace turbohiker
+}
 
 #endif // TURBOHIKER_FINISH_H

@@ -18,8 +18,8 @@ void turbohiker::Entity::setSize(const std::pair<float, float>& size) { Entity::
 
 turbohiker::Entity::Entity() = default;
 
-turbohiker::Entity::Entity(std::pair<float, float> position, std::pair<float, float> size, float speed)
-    : position(std::move(position)), size(std::move(size)), active(true)
+turbohiker::Entity::Entity(std::pair<float, float> position, std::pair<float, float> size)
+    : position(std::move(position)), size(std::move(size))
 {
 }
 

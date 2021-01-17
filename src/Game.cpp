@@ -62,6 +62,7 @@ T_Game::T_Game(const std::shared_ptr<T_State>& state) : state_(state)
                 window = std::make_shared<sf::RenderWindow>(sf::VideoMode(CONST::WINDOW::WIDTH, CONST::WINDOW::HEIGHT),
                                                             "TurboHiker");
                 Transformation::Getinstance().SetWindowSize(CONST::WINDOW::WIDTH, CONST::WINDOW::HEIGHT);
+                keys = {"z", "q", "s", "d"};
                 this->TransitionTo(state);
                 this->Request_Next();
         } catch (exceptions::MyException& MyExcecption) {
@@ -121,8 +122,12 @@ void T_Game_Menu::init()
         wow->setText("");
         wow->setLimit(true, 20);
 
+        std::shared_ptr<sf::Text> err = std::make_shared<sf::Text>("Please enter a name", *font, 40);
+        err->setPosition(wow->getPosition().x - 350, wow->getPosition().y - 100);
+        err->setFillColor(sf::Color::Transparent);
+
         this->setGuiSound(music);
-        this->setGuiObjects({background, play, wow});
+        this->setGuiObjects({background, play, wow, err});
 }
 
 void T_Game_Menu::processEvents()
@@ -157,7 +162,6 @@ void T_Game_Menu::processEvents()
                                                 auto button = std::dynamic_pointer_cast<Button>(object);
                                                 if (button->isMouseOver(position)) {
                                                         button->layoutclick(true, 2);
-                                                        this->getGuiSound()->stop();
                                                         std::string test = button->getText();
                                                         if (button->getText() == "play") {
                                                                 for (const auto& object : this->getGuiObjects()) {
@@ -167,6 +171,7 @@ void T_Game_Menu::processEvents()
                                                                                     std::dynamic_pointer_cast<Textbox>(
                                                                                         object);
                                                                                 if (!textbox->getText().empty()) {
+                                                                                        this->getGuiSound()->stop();
                                                                                         this->context_->setPlayerName(
                                                                                             textbox->getText());
                                                                                         this->context_->TransitionTo(
@@ -179,10 +184,17 @@ void T_Game_Menu::processEvents()
                                                                                         this->context_->Request_Next();
                                                                                         return;
                                                                                 } else {
-                                                                                        // TODO:: DISPLAY THERE HAS TO
-                                                                                        // BE A NAME
+                                                                                        for (const auto& object : this->getGuiObjects()) {
+                                                                                                if (std::dynamic_pointer_cast<sf::Text>(
+                                                                                                    object) != nullptr) {
+                                                                                                        auto text =
+                                                                                                            std::dynamic_pointer_cast<sf::Text>(
+                                                                                                                object);
+                                                                                                        text->setFillColor(sf::Color::Red);
+                                                                                                }
+
+                                                                                        }
                                                                                 }
-                                                                                break;
                                                                         }
                                                                 }
                                                         }
@@ -194,7 +206,6 @@ void T_Game_Menu::processEvents()
                                         }
                                 }
                         }
-                        break;
                 }
         }
 }
@@ -258,7 +269,7 @@ void T_Game_Play::run()
                 }
                 // Restart the timer
                 elapsedSeconds = StopWatch::Getinstance().GetElapsedTime() * 0.001;
-                ;
+
                 StopWatch::Getinstance().Reset();
         }
 }
@@ -274,9 +285,6 @@ void T_Game_Play::processEvents()
                 case sf::Event::Resized:
                         break;
                 case sf::Event::LostFocus:
-                        this->getGuiSound()->stop();
-                        // this->context_->TransitionTo(std::make_shared<T_Game_Settings>());
-                        // this->context_->Request_Next();
                         break;
                 case sf::Event::GainedFocus:
                         break;

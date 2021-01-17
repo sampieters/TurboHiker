@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 18/12/2020.
-//
+/**
+ * \brief The Finish visualization class, a class that allows to show a finish on a screen.
+ * \author Sam Pieters
+ * \date 18 December 2020
+ */
 
 #include "Finish.h"
 
@@ -12,7 +14,7 @@ void turbohikerSFML::Finish::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 

@@ -120,6 +120,7 @@ private:
         std::string player_name;
         /** \brief running is a variable that checks if game is still running.. */
         bool running;
+        std::vector<std::string> keys;
 
 public:
         /**

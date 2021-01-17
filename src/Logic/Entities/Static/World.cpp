@@ -17,26 +17,26 @@ turbohiker::World::World(std::string player_name)
 
 void turbohiker::World::InitWorld()
 {
-        // MAAK DE LANES
+        /* Make lanes */
         generateLanes();
 
-        // MAAK EEN FINISH
+        /* Make a finish */
         entities.push_back(ConcreteFactory->CreateFinish());
 
-        // MAAK SCOREBOARD
+        /* make a scoreboard */
         this->score = ConcreteFactory->CreateScore();
 
-        // MAAK EEN PLAYER
+        /* make a player */
         auto player = ConcreteFactory->CreatePlayer();
         auto temp_player = std::static_pointer_cast<turbohiker::Player>(player);
         temp_player->setLane(std::dynamic_pointer_cast<turbohiker::Lane>(entities[1]));
         temp_player->AttachObserver(this->score);
         entities.push_back(temp_player);
 
-        // MAAK DE CAMERA
+        /* make a camera */
         entities.push_back(ConcreteFactory->CreateCamera(player, score));
 
-        // MAAK COMPETING PLAYERS
+        /* make competing enemies */
         for (int i = 0; i < CONST::ENEMIES::COMPETING::NUMBER; ++i) {
                 auto comp = std::dynamic_pointer_cast<DynamicEntity>(ConcreteFactory->CreateCompetingEnemy());
                 comp->setPosition(
@@ -47,10 +47,10 @@ void turbohiker::World::InitWorld()
                 comp->setLane(std::dynamic_pointer_cast<Lane>(entities[CONST::ENEMIES::COMPETING::LANE[i]]));
                 entities.push_back(comp);
         }
-        // MAAK STATIC AAN
+        /* make static enemies */
         generateRandomStaticEnemies();
 
-        // MAAK ATACKING AAN
+        /* make attacking enemies */
         generateRandomAttackingEnemies();
 }
 
@@ -73,14 +73,14 @@ void turbohiker::World::generateLanes()
 void turbohiker::World::generateRandomStaticEnemies()
 {
         std::vector<std::pair<float, float>> already_used;
-        int number = RandomNumberGenerator::generate_int(3, 10);
+        int number = RandomNumberGenerator::generate_int(CONST::ENEMIES::STATIC::AMOUNT.first, CONST::ENEMIES::STATIC::AMOUNT.second);
         for (int i = 0; i < number; ++i) {
                 auto comp = std::dynamic_pointer_cast<DynamicEntity>(ConcreteFactory->CreateStaticEnemy());
                 float pos_y = RandomNumberGenerator::Getinstance().generate_float(
                     (this->boundaries[2] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES,
                     (this->boundaries[0] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES);
                 pos_y *= CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES;
-                unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0, 4);
+                unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0, CONST::WORLD::NR_OF_LANES);
                 auto lane_1 = std::dynamic_pointer_cast<Lane>(entities[lane]);
                 float pos_x = lane_1->getPosition().first;
 
@@ -97,14 +97,14 @@ void turbohiker::World::generateRandomStaticEnemies()
 void turbohiker::World::generateRandomAttackingEnemies()
 {
         std::vector<std::pair<float, float>> already_used;
-        int number = RandomNumberGenerator::generate_int(3, 10);
+        int number = RandomNumberGenerator::generate_int(CONST::ENEMIES::ATTACKING::AMOUNT.first, CONST::ENEMIES::ATTACKING::AMOUNT.second);
         for (int i = 0; i < number; ++i) {
                 auto comp = std::dynamic_pointer_cast<DynamicEntity>(ConcreteFactory->CreateAttackingEnemy());
                 float pos_y = RandomNumberGenerator::Getinstance().generate_float(
                     (this->boundaries[2] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES,
                     (this->boundaries[0] + 1) / CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES);
                 pos_y *= CONST::WORLD::MIN_DISTANCE_BETWEEN_ENEMIES;
-                unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0, 4);
+                unsigned int lane = RandomNumberGenerator::Getinstance().generate_int(0,  CONST::WORLD::NR_OF_LANES);
                 auto lane_1 = std::dynamic_pointer_cast<Lane>(entities[lane]);
                 float pos_x = lane_1->getPosition().first;
 
@@ -185,8 +185,6 @@ void turbohiker::World::handlePlayerInput(InputCode code, bool pressed)
                                                                 enemy->setResponse(Die);
                                                                 player->NotifyObservers(Event::MURDERED);
 
-                                                                // TODO:: ENtity nog niet hier verwijderen want dan
-                                                                // roept die zijn death niet
                                                                 auto iter =
                                                                     std::find(entities.begin(), entities.end(), enemy);
                                                                 entities.erase(iter);
@@ -251,10 +249,10 @@ void turbohiker::World::handleStates(double elapsedTime)
                 if (std::dynamic_pointer_cast<turbohiker::DynamicEntity>(entity) != nullptr) {
                         auto dynamic = std::static_pointer_cast<turbohiker::DynamicEntity>(entity);
                         if (dynamic->isYell()) {
-                                dynamic->setTimeSindsYelling(dynamic->getTimeSindsYelling() + elapsedTime);
-                                if (dynamic->getTimeSindsYelling() > 2.0) {
+                                dynamic->setTimeSinceYelling(dynamic->getTimeSinceYelling() + elapsedTime);
+                                if (dynamic->getTimeSinceYelling() > 2.0) {
                                         dynamic->setYell(false);
-                                        dynamic->setTimeSindsYelling(0);
+                                        dynamic->setTimeSinceYelling(0);
                                 }
                         }
                         if (isStop()) {
@@ -283,7 +281,7 @@ bool turbohiker::World::checkFinished(const std::shared_ptr<turbohiker::DynamicE
         return false;
 }
 
-void turbohiker::World::CheckWhereToMove(const std::shared_ptr<Enemy>& enemy)
+MovePreference turbohiker::World::CheckWhereToMove(const std::shared_ptr<Enemy>& enemy)
 {
         MovePreference pref = Cannot;
         if (GetClosestEnemy(enemy) != nullptr) {
@@ -320,14 +318,25 @@ void turbohiker::World::CheckWhereToMove(const std::shared_ptr<Enemy>& enemy)
                 enemy->DoSomethingWhenYell(pref);
         }
         // If there is no closest enemy than that (not existing) enemy doesn't need to move
+        return pref;
 }
 
 void turbohiker::World::CompetingAi(const std::shared_ptr<Enemy>& enemy)
 {
         if (std::dynamic_pointer_cast<Competing>(enemy) != nullptr) {
-                if (GetClosestEnemy(enemy) != nullptr) {
-                        if (GetClosestEnemy(enemy)->GetBack().second - enemy->GetFront().second < 0.05) {
-                                CheckWhereToMove(enemy);
+                auto closest_enemy = GetClosestEnemy(enemy);
+                if (closest_enemy != nullptr) {
+                        if (closest_enemy->GetBack().second - enemy->GetFront().second < 0.05) {
+                                MovePreference pref = CheckWhereToMove(enemy);
+                                if(pref == Left) {
+                                     enemy->MoveLeft();
+                                }
+                                else if(pref == Right) {
+                                        enemy->MoveRight();
+                                }
+                                else if(pref == None) {
+                                        enemy->MoveRight();
+                                }
                                 enemy->setYell(false);
                         }
                 }

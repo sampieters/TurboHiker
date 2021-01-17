@@ -29,7 +29,7 @@ void turbohiker::Score::OnNotify(Event event)
                 score += (100 / (finished + 1));
                 break;
         }
-        // This check is needed because score is unsigned integer and would be very large when going under 0.
+        /* This check is needed because score is unsigned integer and would be very large when going under 0. */
         if (to_remove > score) {
                 score = 0;
         } else {
@@ -52,7 +52,7 @@ void turbohiker::Score::writeToFile(const std::string& player_name) const
 
         bool write = false;
         std::string line;
-        // If file  empty
+        /* If file  empty */
         if (inputFile.peek() == std::ifstream::traits_type::eof()) {
                 outputFile << player_name << ": " << score << "\n";
         } else {
@@ -65,7 +65,7 @@ void turbohiker::Score::writeToFile(const std::string& player_name) const
                         }
                         outputFile << line << "\n";
                 }
-                // If at the end of the file the new score is not written, write it.
+                /* If at the end of the file the new score is not written, write it. */
                 if (!write) {
                         outputFile << player_name << ": " << score << "\n";
                 }

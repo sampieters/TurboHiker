@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 01/12/2020.
-//
+/**
+ * \brief The player visualization class, a class that allows to show a player on a screen.
+ * \author Sam Pieters
+ * \date 01 December 2020
+ */
 
 #include "Player.h"
 
@@ -12,7 +14,7 @@ void turbohikerSFML::Player::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 
@@ -25,8 +27,7 @@ void turbohikerSFML::Player::display()
         new_sprite.setTexture(getTexture());
         getWindowToDrawTo()->draw(new_sprite);
 
-        // IF YELLED -> DISPLAY YELL
-
+        /* This if statement displays something more on the screen (text balloon) when given an action */
         if (this->isYell()) {
                 sf::Sprite balloon;
                 sf::Texture text_1;
@@ -34,7 +35,7 @@ void turbohikerSFML::Player::display()
                 balloon.setTexture(text_1);
                 balloon.setOrigin(0, balloon.getTextureRect().height);
                 balloon.setPosition(D_Pos.first, D_Pos.second);
-                // Set Textballoon right above the player
+                /* Sets text balloon above the player on the right */
                 balloon.setScale(0.4, 0.4);
 
                 sf::Font font;

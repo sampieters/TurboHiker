@@ -16,7 +16,7 @@
 #include <memory>
 
 namespace AbstractFactorySFML {
-/** \class Factory RandomNumberGenerator.h "src/Singletons/RandomNumberGenerator.h"
+/** \class Factory AbstractFactory.h "src/Representation/Factories/AbstractFacotry.h"
  * \brief Class that is a part of the AbstractFactory.
  * \details Class that generates an specific entity with the corresponding function. This is the ConcreteFactory that
  *          will create everything in the world (and the world itself).
@@ -93,6 +93,6 @@ public:
          */
         std::shared_ptr<turbohiker::Score> CreateScore() const override;
 };
-} // namespace AbstractFactorySFML
+}
 
 #endif // TURBOHIKERSFML_ABSTRACTFACTORY_H

@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 14/12/2020.
-//
+/**
+ * \brief The Camera visualization class, a class that allows to show a camera on a screen.
+ * \author Sam Pieters
+ * \date 14 December 2020
+ */
 
 #include "Camera.h"
 
@@ -19,7 +21,7 @@ void turbohikerSFML::Camera::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 
@@ -32,16 +34,12 @@ void turbohikerSFML::Camera::display()
         new_sprite.setPosition(D_Pos.first, D_Pos.second);
         new_sprite.setTexture(getTexture());
 
-        /////////////////////////////////////////////////////
-        // TODO:: DIT VOOR CAMERA
-        ////////////////////////////////////////////////////
+        /* extra code fragment for the camera. Allows to set the view equal to the camera's size */
         sf::View view = this->getWindowToDrawTo()->getView();
         view.setSize(D_Size.first, D_Size.second);
         view.setCenter(D_Pos.first, D_Pos.second);
         this->getWindowToDrawTo()->setView(view);
-        /////////////////////////////////////////////////////
-        //
-        ////////////////////////////////////////////////////
+        /* end of extra code fragment */
 
         sf::Font font;
         font.loadFromFile("Resources/BalooBhai-Gujarati.ttf");

@@ -1,6 +1,8 @@
-//
-// Created by Sam Pieters on 04/12/2020.
-//
+/**
+ * \brief The enemy visualization class, a class that allows to show an enemy of a certain type on a screen.
+ * \author Sam Pieters
+ * \date 04 December 2020
+ */
 
 #include "Enemy.h"
 
@@ -28,7 +30,7 @@ void turbohikerSFML::Competing::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* Transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 
@@ -47,7 +49,7 @@ void turbohikerSFML::Competing::display()
                 balloon.setTexture(text_1);
                 balloon.setOrigin(0, balloon.getTextureRect().height);
                 balloon.setPosition(D_Pos.first, D_Pos.second);
-                // Set Textballoon right above the player
+                /* This if statement displays something more on the screen (text balloon) when given an action */
                 balloon.setScale(0.4, 0.4);
 
                 sf::Font font;
@@ -100,7 +102,7 @@ void turbohikerSFML::Static::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* Transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 
@@ -120,7 +122,7 @@ void turbohikerSFML::Static::display()
                 balloon.setTexture(text_1);
                 balloon.setOrigin(0, balloon.getTextureRect().height);
                 balloon.setPosition(D_Pos.first, D_Pos.second);
-                // Set Textballoon right above the player
+                /* This if statement displays something more on the screen (text balloon) when given an action */
                 balloon.setScale(0.4, 0.4);
 
                 sf::Font font;
@@ -173,7 +175,7 @@ void turbohikerSFML::Attacking::display()
 
         new_sprite.setOrigin(static_cast<float>(new_sprite.getTextureRect().width) / 2,
                              static_cast<float>(new_sprite.getTextureRect().height / 2));
-        // transform the width and height of the object to width and height
+        /* Transform the width and height of the object to width and height */
         auto S_Width = new_sprite.getTextureRect().width;
         auto S_Height = new_sprite.getTextureRect().height;
 
@@ -193,7 +195,7 @@ void turbohikerSFML::Attacking::display()
                 balloon.setTexture(text_1);
                 balloon.setOrigin(0, balloon.getTextureRect().height);
                 balloon.setPosition(D_Pos.first, D_Pos.second);
-                // Set Textballoon right above the player
+                /* This if statement displays something more on the screen (text balloon) when given an action */
                 balloon.setScale(0.4, 0.4);
 
                 sf::Font font;

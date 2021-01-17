@@ -8,7 +8,7 @@
 
 turbohiker::Finish::Finish()
 {
-        this->setPosition({0, 2.5});
-        this->setSize({CONST::WORLD::SIZE.first, 0.2});
+        this->setPosition(CONST::FINISH::POSITION);
+        this->setSize({CONST::FINISH::SIZE});
         this->setType(EntityType::Finish);
 }

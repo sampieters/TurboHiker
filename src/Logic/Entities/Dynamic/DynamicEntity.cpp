@@ -88,9 +88,9 @@ bool turbohiker::DynamicEntity::isYell() const { return yell; }
 
 void turbohiker::DynamicEntity::setYell(bool yell) { DynamicEntity::yell = yell; }
 
-double turbohiker::DynamicEntity::getTimeSindsYelling() const { return TimeSindsYelling; }
+double turbohiker::DynamicEntity::getTimeSinceYelling() const { return TimeSindsYelling; }
 
-void turbohiker::DynamicEntity::setTimeSindsYelling(double timeSindsYelling) { TimeSindsYelling = timeSindsYelling; }
+void turbohiker::DynamicEntity::setTimeSinceYelling(double timeSindsYelling) { TimeSindsYelling = timeSindsYelling; }
 
 const std::shared_ptr<turbohiker::Lane>& turbohiker::DynamicEntity::getLane() const { return lane; }
 

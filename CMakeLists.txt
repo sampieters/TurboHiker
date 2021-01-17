@@ -48,7 +48,7 @@ set(Singletons
 
 set(Observer
         src/Observer/Observable.cpp src/Observer/Observable.h
-        src/Observer/Observer.cpp src/Observer/Observer.h
+        src/Observer/Observer.h
         )
 
 set(Representation
